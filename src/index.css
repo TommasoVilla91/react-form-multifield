@@ -30,6 +30,10 @@ h3 {
   gap: 0.5rem;
 }
 
+.text-label {
+  display: block;
+}
+
 ul {
   list-style: none;
 }
@@ -47,7 +51,11 @@ label {
   margin-bottom: 0.5rem;
 }
 
-input {
+.check-input {
+  margin-right: 1rem;
+}
+
+.text-input {
   height: 1.8rem;
   width: 80%;
   margin-right: 1rem;
@@ -83,6 +91,19 @@ input {
   align-items: center;
   gap: 2rem;
   width: 20rem;
+}
+
+.categories-box {
+  margin-bottom: 1rem;
+}
+
+.catego-list {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.publish {
+  margin-left: 1rem;
 }
 
 .bnt-erase {

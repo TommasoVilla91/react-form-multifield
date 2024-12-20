@@ -5,7 +5,7 @@ const initialFormData = {
   image: "",
   title: "",
   content: "",
-  category: [],
+  category: ["Attualità", "Politica", "Economia", "Scienza", "Sport", "Spettacolo", "Moda"],
   published: false
 }
 
@@ -48,15 +48,42 @@ function AppArticles() {
   };
 
   const handleInputOnChange = (event) => {
+
+    // identificare la chiave da cambiare
     const keyToChange = event.target.name;
 
+    // impostare nuovo valore e ricreare oggetto
     let newValue;
+
+    if (event.target.type === "checkbox") {
+      newValue = event.target.checked;
+    } else {
+      newValue = event.target.value;
+    };
+
     const newData = {
       ...formData,
       [keyToChange]: newValue
     };
 
+    // aggiorno l'oggetto 
     setFormData(newData);
+  };
+
+  const printCategories = () => {
+    return formData.category.map((categ, index) => (
+      <div className="catego-list" key={index}>
+        <input
+          className="check-input"
+          type="checkbox" 
+          name="checkbox"
+          id="artCategory"
+          checked={formData.category}
+          onChange={handleInputOnChange}
+          />
+        <label htmlFor="">{categ}</label>        
+      </div>
+    ));
   };
 
   return (
@@ -72,33 +99,61 @@ function AppArticles() {
               <div className="row">
 
                 {/* input per aggiungere nuovo articolo con onChange */}
-                <label htmlFor="image">Immagine</label>
-                <input
-                  type="text"
-                  placeholder="Incolla il link dell'immagine dell'articolo"
-                  name="image"
-                  id="artImage"
-                  value={formData.image}
-                  onChange={handleInputOnChange}
-                />
-                <label htmlFor="title">Titolo</label>
-                <input
-                  type="text"
-                  placeholder="Scrivi il titolo dell'articolo"
-                  name="title"
-                  id="artTitle"
-                  value={formData.title}
-                  onChange={handleInputOnChange}
-                />
-                <label htmlFor="content">Descrizione</label>
-                <input
-                  type="text"
-                  placeholder="Scrivi il contenuto dell'articolo"
-                  name="content"
-                  id="artContent"
-                  value={formData.content}
-                  onChange={handleInputOnChange}
-                />
+                <div>
+                  <label className="text-label" htmlFor="artImage">Immagine</label>
+                  <input
+                    className="text-input"
+                    type="text"
+                    placeholder="Incolla il link dell'immagine dell'articolo"
+                    name="image"
+                    id="artImage"
+                    value={formData.image}
+                    onChange={handleInputOnChange}
+                  />
+                </div>
+
+                <div>
+                  <label className="text-label" htmlFor="artTitle">Titolo</label>
+                  <input
+                    className="text-input"
+                    type="text"
+                    placeholder="Scrivi il titolo dell'articolo"
+                    name="title"
+                    id="artTitle"
+                    value={formData.title}
+                    onChange={handleInputOnChange}
+                  />
+                </div>
+
+                <div>
+                  <label className="text-label" htmlFor="artContent">Descrizione</label>
+                  <input
+                    className="text-input"
+                    type="text"
+                    placeholder="Scrivi il contenuto dell'articolo"
+                    name="content"
+                    id="artContent"
+                    value={formData.content}
+                    onChange={handleInputOnChange}
+                  />
+                </div>
+                
+                <div className="categories-box">
+                  <label htmlFor="artCategory">Categoria</label>
+                  {printCategories()}
+                </div>                
+
+                <div>
+                  <label htmlFor="">Pubblicato</label>
+                  <input
+                    className="publish" 
+                    type="checkbox"
+                    name="published"
+                    id="artPublished"
+                    value={formData.published}
+                    onChange={handleInputOnChange}
+                     />           
+                </div>
 
                 <div>
                   <button type="submit" className="btn-submit">Aggiungi</button>
@@ -118,6 +173,13 @@ function AppArticles() {
                     <img src={curArticle.image} alt="" />
                     <h4>{curArticle.title}</h4>
                     <p>{curArticle.content}</p>
+                    <ul>
+                      {
+                        curArticle.category.map((categ, index) => (
+                          <li key={index}>{categ}</li>
+                        ))
+                      }
+                    </ul>
 
 
                     {/* tasto Elimina in cui nell'onClick metto la funzione removeElem */}
