@@ -6,6 +6,10 @@
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+img {
+  width: 100%;
+}
+
 /* LAYOUT */
 .container {
   width: 80%;
@@ -23,7 +27,7 @@ h3 {
 .row {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 ul {
@@ -39,6 +43,10 @@ button {
 }
 
 /* MAIN */
+label {
+  margin-bottom: 0.5rem;
+}
+
 input {
   height: 1.8rem;
   width: 80%;
@@ -46,6 +54,7 @@ input {
   border-radius: 5px;
   border: 1px solid rgb(167, 167, 167);
   padding-left: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .btn-submit {
@@ -59,7 +68,13 @@ input {
   margin-top: 2rem;
 }
 
-.article {
+.list-articles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
   border: 1px solid rgb(167, 167, 167);
   border-radius: 5px;
   padding: 1rem;
@@ -67,6 +82,7 @@ input {
   display: flex;
   align-items: center;
   gap: 2rem;
+  width: 20rem;
 }
 
 .bnt-erase {
