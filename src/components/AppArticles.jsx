@@ -16,11 +16,12 @@ function AppArticles() {
 
   const [publishMex, setPublishMex] = useState("");
 
+  // impostare 2 messaggi al click sul checkbox publish
   useEffect(() => {
     if(formData.published) {
-      setPublishMex("Così facendo l'articolo sarà visibile!")
+      setPublishMex("Così facendo l'articolo sarà visibile!");
     } else {
-      setPublishMex("Così facendo l'articolo NON sarà visibile!")
+      setPublishMex("Così facendo l'articolo NON sarà visibile!");
     };
 
   }, [formData.published]);
