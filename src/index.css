@@ -85,12 +85,14 @@ label {
 .card {
   border: 1px solid rgb(167, 167, 167);
   border-radius: 5px;
-  padding: 1rem;
   font-size: 1.2rem;
+}
+
+.card-text {
+  padding: 1rem;
   display: flex;
-  align-items: center;
-  gap: 2rem;
-  width: 20rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .categories-box {
@@ -104,6 +106,10 @@ label {
 
 .publish {
   margin-left: 1rem;
+}
+
+.publish-advise {
+  font-size: 0.7rem;
 }
 
 .bnt-erase {

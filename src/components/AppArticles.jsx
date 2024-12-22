@@ -14,9 +14,16 @@ function AppArticles() {
   const [articles, setArticles] = useState(allArticles);
   const [formData, setFormData] = useState(initialFormData);
 
-  useEffect(() => {
+  const [publishMex, setPublishMex] = useState("");
 
-  })
+  useEffect(() => {
+    if(formData.published) {
+      setPublishMex("Così facendo l'articolo sarà visibile!")
+    } else {
+      setPublishMex("Così facendo l'articolo NON sarà visibile!")
+    };
+
+  }, [formData.published]);
 
   // al click su Submit, aggiornare array creando copia e aggiungendo nuovo articolo
   const handleForm = (event) => {
@@ -75,13 +82,13 @@ function AppArticles() {
       <div className="catego-list" key={index}>
         <input
           className="check-input"
-          type="checkbox" 
+          type="checkbox"
           name="checkbox"
           id="artCategory"
           checked={formData.category}
           onChange={handleInputOnChange}
-          />
-        <label htmlFor="">{categ}</label>        
+        />
+        <label htmlFor="">{categ}</label>
       </div>
     ));
   };
@@ -137,22 +144,23 @@ function AppArticles() {
                     onChange={handleInputOnChange}
                   />
                 </div>
-                
-                <div className="categories-box">
+
+                {/* <div className="categories-box">
                   <label htmlFor="artCategory">Categoria</label>
                   {printCategories()}
-                </div>                
+                </div> */}
 
                 <div>
                   <label htmlFor="">Pubblicato</label>
                   <input
-                    className="publish" 
+                    className="publish"
                     type="checkbox"
                     name="published"
                     id="artPublished"
                     value={formData.published}
                     onChange={handleInputOnChange}
-                     />           
+                  />
+                  <p className="publish-advise">{publishMex}</p>
                 </div>
 
                 <div>
@@ -170,20 +178,26 @@ function AppArticles() {
               <div className="list-articles">
                 {articles.map((curArticle) => (
                   <div key={curArticle.id} className="card">
-                    <img src={curArticle.image} alt="" />
-                    <h4>{curArticle.title}</h4>
-                    <p>{curArticle.content}</p>
-                    <ul>
+                    <div className="card-img">
+                      <img src={curArticle.image} alt="" />
+                    </div>
+                    <div className="card-text">
+                      <h4>{curArticle.title}</h4>
+                      <p>{curArticle.content}</p>
+                      {/* <ul>
                       {
                         curArticle.category.map((categ, index) => (
                           <li key={index}>{categ}</li>
                         ))
                       }
-                    </ul>
+                      </ul> */}
 
+                      {/* tasto Elimina in cui nell'onClick metto la funzione removeElem */}
+                      <div>
+                        <button className="bnt-erase" onClick={() => { removeElem(curArticle) }}>Elimina</button>
+                      </div>
+                    </div>
 
-                    {/* tasto Elimina in cui nell'onClick metto la funzione removeElem */}
-                    <button className="bnt-erase" onClick={() => { removeElem(curArticle) }}>Elimina</button>
                   </div>
                 ))}
               </div>
