@@ -34,6 +34,16 @@ h3 {
   display: block;
 }
 
+.catego-title {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.check-categ {
+  margin: 0 0.5rem 0 0.5rem;
+}
+
 select {
   margin-left: 1rem;
   border: 1px solid rgb(212, 212, 212);
@@ -89,7 +99,9 @@ label {
 .card {
   border: 1px solid rgb(167, 167, 167);
   border-radius: 5px;
+  width: 20rem;
   font-size: 1.2rem;
+  overflow: hidden;
 }
 
 .card-text {
@@ -97,10 +109,6 @@ label {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-}
-
-.categories-box {
-  margin-bottom: 1rem;
 }
 
 .catego-list {
@@ -118,6 +126,22 @@ label {
 
 .publish-advise {
   font-size: 0.7rem;
+}
+
+.list-tags {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  background-color:rgb(16, 175, 16);
+  padding: 0.5rem;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.8rem;
 }
 
 .bnt-erase {

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import allArticles from "../data/articles";
+import AppCard from "./AppCard";
 
 const initialFormData = {
   image: "",
   title: "",
   content: "",
   format: "Digitale",
-  category: ["Attualità", "Politica", "Economia", "Scienza", "Sport", "Spettacolo", "Moda"],
+  category: [],
   published: false
 };
 
@@ -19,7 +20,7 @@ function AppArticles() {
 
   // impostare 2 messaggi al click sul checkbox publish
   useEffect(() => {
-    if(formData.published) {
+    if (formData.published) {
       setPublishMex("Così facendo l'articolo sarà visibile!");
     } else {
       setPublishMex("");
@@ -31,7 +32,7 @@ function AppArticles() {
   const handleForm = (event) => {
     event.preventDefault();
 
-    // creo oggetto per nuovo articolo
+    // creo id per nuovo oggetto
     const newArticle = {
       ...formData,
       id: Date.now()
@@ -79,20 +80,17 @@ function AppArticles() {
     setFormData(newData);
   };
 
-  const printCategories = () => {
-    return formData.category.map((categ, index) => (
-      <div className="catego-list" key={index}>
-        <input
-          className="check-input"
-          type="checkbox"
-          name="checkbox"
-          id="artCategory"
-          checked={formData.category}
-          onChange={handleInputOnChange}
-        />
-        <label htmlFor="">{categ}</label>
-      </div>
-    ));
+  const handleCategories = (event) => {
+    const { name, checked } = event.target;
+
+    const newArray = checked
+      ? [...(formData.category || []), name]
+      : (formData.category || []).filter((curElem) => curElem !== name);
+
+    setFormData({
+      ...formData,
+      category: newArray,
+    });
   };
 
   return (
@@ -149,8 +147,8 @@ function AppArticles() {
 
                 <div>
                   <label className="select-label" htmlFor="artFormat">Formato</label>
-                  <select 
-                    name="format" 
+                  <select
+                    name="format"
                     id="artFormat"
                     type="text"
                     value={formData.format}
@@ -161,10 +159,53 @@ function AppArticles() {
                   </select>
                 </div>
 
-                {/* <div className="categories-box">
-                  <label htmlFor="artCategory">Categoria</label>
-                  {printCategories()}
-                </div> */}
+                <div className="catego-list">
+                  <span className="catego-title">Categorie</span>
+                  <label htmlFor="artCategory">Cronaca</label>
+                  <input
+                    className="check-categ"
+                    type="checkbox"
+                    name="Cronaca"
+                    id="artCategory"
+                    onChange={handleCategories}
+                  />
+
+                  <label htmlFor="artCategory">Sport</label>
+                  <input
+                    className="check-categ"
+                    type="checkbox"
+                    name="Sport"
+                    id="artCategory"
+                    onChange={handleCategories}
+                  />
+
+                  <label htmlFor="artCategory">Scienza</label>
+                  <input
+                    className="check-categ"
+                    type="checkbox"
+                    name="Scienza"
+                    id="artCategory"
+                    onChange={handleCategories}
+                  />
+
+                  <label htmlFor="artCategory">Moda</label>
+                  <input
+                    className="check-categ"
+                    type="checkbox"
+                    name="Moda"
+                    id="artCategory"
+                    onChange={handleCategories}
+                  />
+
+                  <label htmlFor="artCategory">Politica</label>
+                  <input
+                    className="check-categ"
+                    type="checkbox"
+                    name="Politica"
+                    id="artCategory"
+                    onChange={handleCategories}
+                  />
+                </div>
 
                 <div className="publish-box">
                   <label htmlFor="artPublished">Pubblica libro</label>
@@ -192,30 +233,19 @@ function AppArticles() {
             {/* stampare articoli */}
             {articles.length > 0 ? (
               <div className="list-articles">
-                {articles.map((curArticle) => (
-                  <div key={curArticle.id} className="card">
-                    <div className="card-img">
-                      <img src={curArticle.image} alt="" />
-                    </div>
-                    <div className="card-text">
-                      <h4>{curArticle.title}</h4>
-                      <p>{curArticle.content}</p>
-
-                      {/* <ul>
-                      {
-                        curArticle.category.map((categ, index) => (
-                          <li key={index}>{categ}</li>
-                        ))
-                      }
-                      </ul> */}
-
-                      {/* tasto Elimina in cui nell'onClick metto la funzione removeElem */}
-                      <div>
-                        <button className="bnt-erase" onClick={() => { removeElem(curArticle) }}>Elimina</button>
-                      </div>
-                    </div>
-
-                  </div>
+                {articles.map((curArticle, curIndex) => (
+                  <AppCard 
+                    key={curIndex}
+                    image={curArticle.image}
+                    title={curArticle.title}
+                    content={curArticle.content}
+                    format={curArticle.format}
+                    category={curArticle.category}
+                    erase={(event) => {
+                      removeElem(curArticle);
+                    }}
+                    arrayCategories={curArticle.category}
+                  />
                 ))}
               </div>
             ) : (
