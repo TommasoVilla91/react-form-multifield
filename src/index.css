@@ -34,8 +34,12 @@ h3 {
   display: block;
 }
 
-ul {
-  list-style: none;
+select {
+  margin-left: 1rem;
+  border: 1px solid rgb(212, 212, 212);
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 5px;
 }
 
 button {
@@ -102,6 +106,10 @@ label {
 .catego-list {
   margin-top: 0.5rem;
   font-size: 0.8rem;
+}
+
+.publish-box {
+  margin-top: 1rem;
 }
 
 .publish {

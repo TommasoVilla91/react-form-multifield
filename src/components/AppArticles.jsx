@@ -5,9 +5,10 @@ const initialFormData = {
   image: "",
   title: "",
   content: "",
+  format: "Digitale",
   category: ["Attualità", "Politica", "Economia", "Scienza", "Sport", "Spettacolo", "Moda"],
   published: false
-}
+};
 
 function AppArticles() {
 
@@ -21,7 +22,7 @@ function AppArticles() {
     if(formData.published) {
       setPublishMex("Così facendo l'articolo sarà visibile!");
     } else {
-      setPublishMex("Così facendo l'articolo NON sarà visibile!");
+      setPublishMex("");
     };
 
   }, [formData.published]);
@@ -146,13 +147,27 @@ function AppArticles() {
                   />
                 </div>
 
+                <div>
+                  <label className="select-label" htmlFor="artFormat">Formato</label>
+                  <select 
+                    name="format" 
+                    id="artFormat"
+                    type="text"
+                    value={formData.format}
+                    onChange={handleInputOnChange}
+                  >
+                    <option value="Digitale">Digitale</option>
+                    <option value="Cartaceo">Cartaceo</option>
+                  </select>
+                </div>
+
                 {/* <div className="categories-box">
                   <label htmlFor="artCategory">Categoria</label>
                   {printCategories()}
                 </div> */}
 
-                <div>
-                  <label htmlFor="">Pubblicato</label>
+                <div className="publish-box">
+                  <label htmlFor="artPublished">Pubblica libro</label>
                   <input
                     className="publish"
                     type="checkbox"
@@ -185,6 +200,7 @@ function AppArticles() {
                     <div className="card-text">
                       <h4>{curArticle.title}</h4>
                       <p>{curArticle.content}</p>
+
                       {/* <ul>
                       {
                         curArticle.category.map((categ, index) => (
